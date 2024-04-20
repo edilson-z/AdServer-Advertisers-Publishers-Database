@@ -362,93 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAdvertismentAdvertisment extends Schema.CollectionType {
-  collectionName: 'advertisments';
-  info: {
-    singularName: 'advertisment';
-    pluralName: 'advertisments';
-    displayName: 'advertisement';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    status: Attribute.Enumeration<['Active', 'Inactive']>;
-    name: Attribute.String;
-    impressions: Attribute.Integer;
-    clicks: Attribute.Integer;
-    conversions: Attribute.Integer;
-    campaign: Attribute.Relation<
-      'api::advertisment.advertisment',
-      'manyToOne',
-      'api::campaign.campaign'
-    >;
-    description: Attribute.Text;
-    adSize: Attribute.String;
-    artwork: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::advertisment.advertisment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::advertisment.advertisment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCampaignCampaign extends Schema.CollectionType {
-  collectionName: 'campaigns';
-  info: {
-    singularName: 'campaign';
-    pluralName: 'campaigns';
-    displayName: 'campaign';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    start: Attribute.Date;
-    end: Attribute.Date;
-    description: Attribute.Text;
-    targetAudience: Attribute.String;
-    budget: Attribute.Integer;
-    targetDevices: Attribute.Text;
-    geographicTargeting: Attribute.Text;
-    campaignStatus: Attribute.String;
-    advertisements: Attribute.Relation<
-      'api::campaign.campaign',
-      'oneToMany',
-      'api::advertisment.advertisment'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::campaign.campaign',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::campaign.campaign',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -875,6 +788,125 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAdvertismentAdvertisment extends Schema.CollectionType {
+  collectionName: 'advertisments';
+  info: {
+    singularName: 'advertisment';
+    pluralName: 'advertisments';
+    displayName: 'advertisement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    status: Attribute.Enumeration<['Active', 'Inactive']>;
+    name: Attribute.String;
+    impressions: Attribute.Integer;
+    clicks: Attribute.Integer;
+    conversions: Attribute.Integer;
+    campaign: Attribute.Relation<
+      'api::advertisment.advertisment',
+      'manyToOne',
+      'api::campaign.campaign'
+    >;
+    description: Attribute.Text;
+    adSize: Attribute.String;
+    artwork: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::advertisment.advertisment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::advertisment.advertisment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCampaignCampaign extends Schema.CollectionType {
+  collectionName: 'campaigns';
+  info: {
+    singularName: 'campaign';
+    pluralName: 'campaigns';
+    displayName: 'campaign';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    start: Attribute.Date;
+    end: Attribute.Date;
+    description: Attribute.Text;
+    targetAudience: Attribute.String;
+    budget: Attribute.Integer;
+    targetDevices: Attribute.Text;
+    geographicTargeting: Attribute.Text;
+    campaignStatus: Attribute.String;
+    advertisements: Attribute.Relation<
+      'api::campaign.campaign',
+      'oneToMany',
+      'api::advertisment.advertisment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::campaign.campaign',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::campaign.campaign',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiInventoryInventory extends Schema.CollectionType {
+  collectionName: 'inventories';
+  info: {
+    singularName: 'inventory';
+    pluralName: 'inventories';
+    displayName: 'Inventory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    url: Attribute.String;
+    category: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::inventory.inventory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::inventory.inventory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -885,8 +917,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::advertisment.advertisment': ApiAdvertismentAdvertisment;
-      'api::campaign.campaign': ApiCampaignCampaign;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -895,6 +925,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::advertisment.advertisment': ApiAdvertismentAdvertisment;
+      'api::campaign.campaign': ApiCampaignCampaign;
+      'api::inventory.inventory': ApiInventoryInventory;
     }
   }
 }
